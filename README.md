@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Spend Audit | Built for Credex
 
-## Getting Started
+A hyper-optimized, visually stunning B2B SaaS wedge designed to help engineering and finance teams identify redundancies, reclaim unused seats, and optimize their AI subscription stack (ChatGPT, GitHub Copilot, Anthropic API, etc.).
 
-First, run the development server:
+## 🚀 Live Demo Ready
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This application is engineered for production with a strict adherence to performance, accessibility, and modern web aesthetics (Linear/Vercel styling).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+*   **Lighthouse Targets:** 95+ across Performance, Accessibility, Best Practices, and SEO.
+*   **Zero-Layout-Shift:** Server-side data fetching ensures the report page loads instantly without jank.
+*   **Type-Safe:** End-to-end type safety using Zod, React Hook Form, and strict TypeScript.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🧠 The Audit Engine
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Located at `src/lib/audit-engine.ts`, this pure function is the core of the application. It applies financially defensible heuristics to a company's SaaS stack.
+Current rules include:
+1.  **Redundancy Checks:** Flags overlapping capabilities (e.g., paying for both Cursor and GitHub Copilot).
+2.  **API Spend Optimization:** Recommends semantic caching and model routing for unoptimized API usage.
+3.  **Seat Optimization:** Cross-references stated team size with active subscription seats to find waste.
+4.  **Tier Downgrades:** Recommends mathematically optimal downgrades (e.g., ChatGPT Team vs Plus) while explicitly stating the *caveats* (e.g., loss of data privacy or shared workspaces).
 
-## Learn More
+## 🛠 Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+*   **Framework:** Next.js 14+ (App Router, Server Actions)
+*   **Styling:** Tailwind CSS v4, Lucide Icons, Shadcn UI
+*   **Database:** Supabase (PostgreSQL) with local in-memory fallback.
+*   **Validation:** Zod + React Hook Form
+*   **Testing:** Vitest
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📚 Submission Documents
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Please review the following documents for a deeper dive into the product strategy and architecture:
+*   [ARCHITECTURE.md](./ARCHITECTURE.md) - Technical decisions, trade-offs, and scaling plans.
+*   [ECONOMICS.md](./ECONOMICS.md) - Unit economics and real-world math scenarios for the audit logic.
+*   [GTM.md](./GTM.md) - Go-to-market strategy, acquisition channels, and the "Shadow IT" SEO play.
 
-## Deploy on Vercel
+## 🏃‍♂️ Running Locally
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1.  Clone the repository.
+2.  Run `npm install`.
+3.  Set up environment variables (optional, app will gracefully degrade to in-memory mock if absent):
+    *   `NEXT_PUBLIC_SUPABASE_URL`
+    *   `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+4.  Run `npm run dev` and navigate to `http://localhost:3000`.

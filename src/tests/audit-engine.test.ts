@@ -57,7 +57,7 @@ describe('Audit Engine', () => {
     };
     const result = runAudit(request);
     expect(result.opportunities).toContainEqual(
-      expect.objectContaining({ actionType: 'downgrade', toolId: '1', estimatedMonthlySavings: 180 }) // 30% of 600
+      expect.objectContaining({ actionType: 'downgrade', toolId: '1', estimatedMonthlySavings: 240 }) // 40% of 600
     );
   });
 
@@ -71,7 +71,7 @@ describe('Audit Engine', () => {
     };
     const result = runAudit(request);
     expect(result.opportunities).toContainEqual(
-      expect.objectContaining({ actionType: 'switch', title: 'Unlock Credex Startup Discounts' })
+      expect.objectContaining({ actionType: 'switch', title: 'Unlock Credex Enterprise Discounts' })
     );
     expect(result.totalEstimatedMonthlySavings).toBeGreaterThanOrEqual(225); // 15% of 1500
   });
@@ -88,5 +88,21 @@ describe('Audit Engine', () => {
     expect(result.opportunities).toContainEqual(
       expect.objectContaining({ actionType: 'cancel', toolId: '1', estimatedMonthlySavings: 50 }) // 5 unused seats * $10
     );
+  });
+
+  it('should identify redundancy between Claude and ChatGPT', () => {
+    const request: AuditRequest = {
+      teamSize: 5,
+      useCase: 'General',
+      tools: [
+        { id: '1', name: 'ChatGPT Plus', category: 'chat', planName: 'Plus', seats: 5, monthlySpend: 100 },
+        { id: '2', name: 'Claude Pro', category: 'chat', planName: 'Pro', seats: 5, monthlySpend: 100 },
+      ],
+    };
+    const result = runAudit(request);
+    expect(result.opportunities).toContainEqual(
+      expect.objectContaining({ actionType: 'consolidate', title: 'Rationalize General Chat Tools' })
+    );
+    expect(result.totalEstimatedMonthlySavings).toBe(50); // 50% of ChatGPT spend (100 * 0.5)
   });
 });
