@@ -89,15 +89,15 @@ export function runAudit(request: AuditRequest): AuditResult {
   
   // Rule 4: Underutilized seats
   for (const tool of tools) {
-     if (tool.seats > teamSize) {
+     if (tool.seats > teamSize && tool.seats > 0) {
         const costPerSeat = tool.monthlySpend / tool.seats;
-        const overage = tool.seats - teamSize;
+        const overage = tool.seats - Math.max(1, teamSize);
         opportunities.push({
            toolId: tool.id,
            title: `Reclaim unused seats for ${tool.name}`,
            description: `You are currently paying for ${tool.seats} seats but your stated team size is only ${teamSize}.`,
            caveat: `Ensure that the "extra" seats aren't being used by contractors, service accounts, or external partners before canceling.`,
-           estimatedMonthlySavings: overage * costPerSeat,
+           estimatedMonthlySavings: Math.max(0, overage * costPerSeat),
            actionType: 'cancel',
         })
      }
