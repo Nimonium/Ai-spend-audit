@@ -1,7 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, BarChart3, ShieldCheck, Zap } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
@@ -21,9 +19,9 @@ export default function Home() {
           </nav>
           <div className="flex items-center gap-4">
             <Link href="/audit" className="text-sm font-medium hover:underline hidden sm:block">Sign in</Link>
-            <Button asChild size="sm" className="rounded-full px-5">
-              <Link href="/audit">Run Audit</Link>
-            </Button>
+            <Link href="/audit" className="inline-flex h-7 items-center justify-center rounded-full bg-primary px-5 text-[0.8rem] font-medium text-primary-foreground hover:bg-primary/80">
+              Run Audit
+            </Link>
           </div>
         </div>
       </header>
@@ -50,16 +48,12 @@ export default function Home() {
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-              <Button asChild size="lg" className="rounded-full px-8 h-12 text-base w-full sm:w-auto">
-                <Link href="/audit">
-                  Start Free Audit <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-              <Button asChild variant="outline" size="lg" className="rounded-full px-8 h-12 text-base w-full sm:w-auto bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm">
-                <Link href="#features">
-                  View Example Report
-                </Link>
-              </Button>
+              <Link href="/audit" className="inline-flex items-center justify-center bg-primary text-primary-foreground hover:bg-primary/80 rounded-full px-8 h-12 text-base w-full sm:w-auto font-medium">
+                Start Free Audit <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+              <Link href="#features" className="inline-flex items-center justify-center rounded-full px-8 h-12 text-base w-full sm:w-auto bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm border border-input font-medium hover:bg-muted hover:text-foreground">
+                View Example Report
+              </Link>
             </div>
             
             <div className="pt-12 flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm text-zinc-500 font-medium">

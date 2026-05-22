@@ -1,5 +1,4 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
 export default function NotFound() {
@@ -9,13 +8,13 @@ export default function NotFound() {
         <CardHeader>
           <CardTitle className="text-2xl">Audit Not Found</CardTitle>
           <CardDescription>
-            We couldn't find the AI spend audit you're looking for. It may have expired or the link is incorrect.
+            We couldn&apos;t find the AI spend audit you&apos;re looking for. It may have expired or the link is incorrect.
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <Button asChild className="mt-4">
-            <Link href="/audit">Run a New Audit</Link>
-          </Button>
+          <Link href="/audit" className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 mt-4">
+            Run a New Audit
+          </Link>
         </CardContent>
       </Card>
     </div>

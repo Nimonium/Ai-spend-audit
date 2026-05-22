@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { getAuditFromDatabase } from '@/lib/supabase';
-import { AlertTriangle, ArrowDownRight, CheckCircle2, ChevronRight, XCircle, ArrowRightLeft, Sparkles } from 'lucide-react';
+import { AlertTriangle, ArrowDownRight, CheckCircle2, XCircle, ArrowRightLeft, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 
 function ActionIcon({ type }: { type: string }) {
@@ -34,9 +34,9 @@ export default async function ReportPage({ params }: { params: { id: string } })
       <header className="border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <span className="font-semibold tracking-tight">Credex Audit Result</span>
-          <Button asChild variant="outline" size="sm">
-             <Link href="/audit">Run New Audit</Link>
-          </Button>
+          <Link href="/audit" className="inline-flex h-7 items-center justify-center rounded-md border border-input bg-background px-2.5 text-[0.8rem] font-medium hover:bg-muted hover:text-foreground">
+             Run New Audit
+          </Link>
         </div>
       </header>
 
@@ -122,7 +122,7 @@ export default async function ReportPage({ params }: { params: { id: string } })
                   <CheckCircle2 className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-semibold">Your stack is perfectly optimized.</h3>
-                <p className="text-zinc-500 max-w-sm">We couldn't find any clear redundancies or cost-saving measures in your current AI subscriptions. Great job!</p>
+                <p className="text-zinc-500 max-w-sm">We couldn&apos;t find any clear redundancies or cost-saving measures in your current AI subscriptions. Great job!</p>
               </CardContent>
             </Card>
           )}

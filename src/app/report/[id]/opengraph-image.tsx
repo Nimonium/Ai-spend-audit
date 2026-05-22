@@ -8,9 +8,9 @@ export const size = {
 };
 export const contentType = 'image/png';
  
-export default async function Image({ params }: { params: { id: string } }) {
-  // In production, we fetch the audit result here using the ID
-  // to dynamically inject the saved amount into the OG image.
+export default async function Image() {
+  // TODO: Fetch the audit result using the ID parameter to dynamically 
+  // inject the specific dollar savings amount into the generated OG image.
   
   return new ImageResponse(
     (

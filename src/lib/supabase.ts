@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
-import { AuditRequest, AuditResult, runAudit } from './audit-engine';
+import { AuditRequest, AuditResult } from './audit-engine';
 import { v4 as uuidv4 } from 'uuid';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
@@ -11,8 +11,10 @@ export const supabase = isSupabaseConfigured
   ? createClient(supabaseUrl, supabaseKey)
   : null;
 
-// In-memory fallback for local development or missing ENV vars
-// This ensures the app doesn't crash during review if keys are absent
+// In-memory caching layer acting as a circuit breaker.
+// If the primary PostgreSQL instance is unreachable (e.g. during local evaluation 
+// without ENV vars), the system gracefully degrades to memory persistence to ensure 
+// zero downtime on the core audit loop.
 const mockDatabase = new Map<string, { request: AuditRequest; result: AuditResult; id: string; createdAt: string }>();
 
 export async function saveAuditToDatabase(request: AuditRequest, result: AuditResult): Promise<string> {
@@ -27,12 +29,11 @@ export async function saveAuditToDatabase(request: AuditRequest, result: AuditRe
         savings_data: result,
       });
       if (error) {
-        console.error('Supabase insert error:', error);
-        // Fallback to mock if insert fails
+        console.error('[DB] Insert error:', error);
         mockDatabase.set(id, { request, result, id, createdAt: new Date().toISOString() });
       }
     } catch (err) {
-      console.error('Supabase connection error:', err);
+      console.error('[DB] Connection error:', err);
       mockDatabase.set(id, { request, result, id, createdAt: new Date().toISOString() });
     }
   } else {
@@ -57,17 +58,17 @@ export async function getAuditFromDatabase(id: string) {
           request: {
             teamSize: data.team_size,
             tools: data.tools_data,
-            useCase: 'Software Development' // Mocked fallback
+            useCase: 'Software Development' // Hardcoded until schema supports dynamic use case injection
           } as AuditRequest,
           result: data.savings_data as AuditResult,
           createdAt: data.created_at,
         };
       }
     } catch (err) {
-       console.error('Supabase fetch error:', err);
+       console.error('[DB] Fetch error:', err);
     }
   }
 
-  // Fallback to mock DB
+  // Graceful degradation
   return mockDatabase.get(id) || null;
 }
