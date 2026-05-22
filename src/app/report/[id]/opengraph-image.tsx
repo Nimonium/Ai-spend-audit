@@ -9,8 +9,8 @@ export const size = {
 export const contentType = 'image/png';
  
 export default async function Image() {
-  // TODO: Fetch the audit result using the ID parameter to dynamically 
-  // inject the specific dollar savings amount into the generated OG image.
+  // Render generic fallback image since we don't pass dynamic data to OG endpoint
+  // to keep the MVP simple.
   
   return new ImageResponse(
     (

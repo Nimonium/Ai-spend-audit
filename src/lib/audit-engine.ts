@@ -104,12 +104,12 @@ export function runAudit(request: AuditRequest): AuditResult {
   }
 
   // Rule 5: Credex Discount Opportunity
-  if (totalCurrentMonthlySpend > 1000) {
+  if (totalCurrentMonthlySpend >= 5000) {
      opportunities.push({
         title: `Unlock Credex Enterprise Discounts`,
-        description: `Your aggregate AI spend ($${totalCurrentMonthlySpend}/mo) qualifies for bulk vendor discounts through a Credex advisory consultation.`,
-        caveat: `Discount negotiation requires annual commitments.`,
-        estimatedMonthlySavings: totalCurrentMonthlySpend * 0.15, // 15% discount assumption
+        description: `Your aggregate AI spend ($${totalCurrentMonthlySpend}/mo) implies an annualized run rate where bulk vendor discounts become negotiable.`,
+        caveat: `Requires minimum 12-to-24 month lock-in and a centralized procurement process.`,
+        estimatedMonthlySavings: totalCurrentMonthlySpend * 0.10, // 10% realistic enterprise discount
         actionType: 'switch',
      });
   }

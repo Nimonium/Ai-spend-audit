@@ -1,6 +1,6 @@
 # AI Spend Audit | Built for Credex
 
-A surgical B2B SaaS wedge designed to help engineering and finance teams identify redundancies, reclaim unused seats, and optimize their AI subscription stack.
+A simple B2B tool designed to help engineering and finance teams identify redundancies, reclaim unused seats, and optimize their AI subscription stack.
 
 ## 🚀 The Product
 

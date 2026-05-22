@@ -1,6 +1,6 @@
 # Founder Reflection
 
-Building the AI Spend Audit wedge has been an exercise in brutal prioritization. When I started, I fell into the classic engineering trap: I wanted to build a fully automated, OAuth-integrated SaaS management platform. 
+Building the AI Spend Audit wedge has been an exercise in scoping. When I started, I fell into the classic engineering trap: I wanted to build a fully automated, OAuth-integrated SaaS management platform. 
 
 ## What Failed
 
@@ -14,4 +14,4 @@ Building the AI Spend Audit wedge has been an exercise in brutal prioritization.
 
 The MVP proves the wedge. The Next.js App Router architecture is solid, and the graceful fallback to in-memory caching ensures it won't crash during a demo.
 
-The biggest existential risk to the business right now is not technical—it's operational. If this tool goes viral, Credex will be flooded with "Book a Consultation" requests. Fulfilling those requests requires human negotiation time. The next engineering phase must focus on internal tooling to automate the procurement and vendor negotiation process, or the advisory margins will collapse.
+The biggest operational bottleneck to the business right now is not technical. If this tool goes viral, Credex will be flooded with "Book a Consultation" requests. Fulfilling those requests requires human negotiation time. The next engineering phase must focus on internal tooling to automate the procurement and vendor negotiation process, or the advisory margins will collapse.
